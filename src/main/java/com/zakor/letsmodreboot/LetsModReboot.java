@@ -1,5 +1,6 @@
 package com.zakor.letsmodreboot;
 
+import com.zakor.letsmodreboot.configuration.ConfigurationHandler;
 import com.zakor.letsmodreboot.proxy.IProxy;
 import com.zakor.letsmodreboot.reference.Reference;
 import cpw.mods.fml.common.Mod;
@@ -18,13 +19,13 @@ public class LetsModReboot
     @Mod.Instance(Reference.MOD_ID)
     public static LetsModReboot instance;
 
-    @SidedProxy(clientSide = "com.zakor.letsmodreboot.proxy.ClientProxy", serverSide = "com.zakor.letsmodreboot.proxy.ServerProxy")
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static IProxy proxy;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-
+        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
     }
 
     @Mod.EventHandler
